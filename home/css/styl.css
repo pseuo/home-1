@@ -1,0 +1,106 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+body {
+	font-family: 'adelle', 'Georgia', Helvetica,Arial,Simsun,sans-serif;
+	font-size: 18px;
+	color: #444;
+	background: #fdfdfd;
+}
+a {
+	color: black;
+	text-decoration: none;
+	transition: color linear 0.2s;
+}
+a:hover {
+	color: indianred;
+}
+.center-container {
+	width: 660px;
+	max-width: 90%;
+	margin: 0 auto;
+}
+.header-wrap {
+	width: 100%;
+	border-bottom: solid 1px #eee;
+}
+.header-wrap .header {
+	padding: 40px 0;
+	overflow: hidden;
+}
+.header-wrap .header .logo {
+	width: 40%;
+	float: left;
+	font-size: 1.5em;
+}
+.header-wrap .header .links {
+	width: 60%;
+	text-align: right;
+	float: right;
+}
+.header-wrap .header .links a {
+	margin: 0 0.8em;
+}
+.content-wrap {
+	margin-top: 50px;
+}
+.post {
+	line-height: 1.6;
+	margin-bottom: 100px;
+	word-break: break-word;
+}
+.post .title {
+	font-size: 1.25em;
+	color: black;
+	font-weight: normal;
+	margin-bottom: 15px;
+}
+.normal-post .title {
+	position: relative;
+	margin-top: 2em;
+	font-size: 1.6em;
+	font-weight: normal;
+	line-height: 1.5;
+	font-family: 'adelle', 'Georgia', "Kaiti SC", "KaiTi", serif;
+}
+.normal-post .post-body {
+	margin-top: 30px;
+	line-height: 2.5;
+	font-size: 1.1em;
+	margin: 1.5em 0;
+}
+.normal-post .post-body p {
+	text-align: center;
+}
+.normal-post .post-body p.date {
+	text-align: right;
+	margin: 40px 0;
+	font-size: 0.8em;
+	color: #bbb;
+}
+.footer-wrap {
+	padding: 40px 0 10px;
+}
+.footer-wrap p {
+	margin-top: 5px;
+	text-align: center;
+	color: #888;
+	font-size: 0.75em;
+}
+@media screen and (max-width: 480px) {
+	body {
+	font-size: 0.8em;
+}
+.post {
+	line-height: 1.6;
+	margin-bottom: 55px;
+}
+.header-wrap .header .links a {
+	margin: 0 0.5em;
+}
+.post.normal-post .title {
+	font-size: 1.4em;
+	line-height: 1.2;
+}
+}
