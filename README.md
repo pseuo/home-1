@@ -2,7 +2,9 @@
 
 一个轻量、响应式、易部署的个人引导页 / 链接聚合页开源项目。
 
-LinkNest 适合用于搭建个人主页、站点导航页、项目入口页或个人服务聚合页。项目基于原生 HTML、CSS 和少量 JavaScript 构建，无需复杂依赖，下载后即可修改和部署。
+LinkNest 适合用于搭建个人主页、站点导航页、项目入口页或个人服务聚合页。
+
+项目基于原生 HTML、CSS 和少量 JavaScript 构建，无需复杂依赖，下载后即可修改和部署。
 
 ## 目录
 
@@ -24,11 +26,6 @@ LinkNest 适合用于搭建个人主页、站点导航页、项目入口页或�
 - SEO 友好：内置基础 `title`、`description`、Open Graph 和 Twitter Card 信息
 - 易于部署：可部署到 GitHub Pages、Cloudflare Pages、Vercel、Netlify 或任意静态网站服务
 
-## 预览
-
-你可以将项目部署到任意静态托管平台后访问，也可以直接在本地打开 `index.html` 进行预览。
-
-如果你使用 `latest.html`，建议通过本地静态服务器打开，例如 `npx serve .`，这样可以正常读取 `data/latest.json`。
 
 ## 项目结构
 
@@ -46,34 +43,7 @@ linknest/
 └── README.md         # 项目说明
 ```
 
-## 快速开始
-
-### 1. 下载项目
-
-```bash
-git clone https://github.com/yourname/linknest.git
-cd linknest
-```
-
-如果你没有使用 Git，也可以直接下载源码压缩包并解压。
-
-### 2. 本地预览
-
-直接用浏览器打开：
-
-```text
-index.html
-```
-
-也可以使用任意静态服务器预览，例如：
-
-```bash
-npx serve .
-```
-
-如果你直接双击打开 HTML 文件，部分浏览器可能会限制 `fetch` 读取本地 JSON，导致最新动态无法加载。
-
-### 3. 修改内容
+### 修改内容
 
 主要修改 `index.html` 中的以下内容：
 
@@ -117,29 +87,6 @@ data/latest.json
 css/style.css
 ```
 
-## 部署方式
-
-LinkNest 是纯静态项目，可以部署到常见静态托管平台。
-
-推荐方式：
-
-- GitHub Pages
-- Cloudflare Pages
-- Vercel
-- Netlify
-- 宝塔面板 / Nginx / Apache 静态站点
-
-部署时将整个项目目录上传即可，入口文件为：
-
-```text
-index.html
-```
-
-如果你把项目部署到自己的域名，记得同步修改以下内容：
-
-- `index.html`、`latest.html`、`about.html` 中的 `canonical`
-- `og:url`
-- 页面中的站点地址、头像和外链
 
 ## 自定义建议
 
@@ -153,6 +100,7 @@ index.html
 ### 为什么最新动态页显示“加载失败”？
 
 通常是因为没有通过静态服务器打开，或者 `data/latest.json` 路径不正确。请优先使用本地静态服务器预览。
+PS：如果你直接双击打开 HTML 文件，部分浏览器可能会限制 `fetch` 读取本地 JSON，导致最新动态无法加载。
 
 ### 怎么新增一条动态？
 
@@ -162,21 +110,9 @@ index.html
 
 把首页文案、卡片链接、头像图标和关于页联系方式替换成你的信息即可。
 
-## 开源协议
-
-本项目建议使用 MIT License。你可以自由使用、修改和二次发布。
-
-如果你发布自己的版本，建议保留项目来源或注明基于 LinkNest 修改。
 
 ## 维护说明
 
 - 页面内容偏静态，适合个人主页和轻量导航页场景
 - `latest.html` 适合后续接入 RSS、接口数据或 CMS 输出
 - 当前示例内容中的域名和联系方式需要按你的实际站点替换
-
-## 项目信息
-
-- 项目名：LinkNest
-- 中文名：链巢
-- 仓库名：linknest
-- 项目类型：个人引导页 / 链接聚合页
