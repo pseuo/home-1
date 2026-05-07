@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>最新动态 - LinkNest 链巢</title>
+    <meta name="description" content="查看 LinkNest 链巢的最新动态、近期更新和站点公告。">
+    <meta name="keywords" content="LinkNest,链巢,最新动态,近期更新,站点公告">
+    <meta name="theme-color" content="#f5f7fb">
+    <link rel="canonical" href="https://api.liesys.com/latest.html">
+    <meta property="og:title" content="最新动态 - LinkNest 链巢">
+    <meta property="og:description" content="查看 LinkNest 链巢的最新动态、近期更新和站点公告。">
+    <meta property="og:image" content="image/icon.png">
+    <meta property="og:url" content="https://api.liesys.com/latest.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="LinkNest 链巢">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="最新动态 - LinkNest 链巢">
+    <meta name="twitter:description" content="查看 LinkNest 链巢的最新动态、近期更新和站点公告。">
+    <meta name="twitter:image" content="image/icon.png">
+    <link rel="icon" href="image/icon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="image/icon.png" />
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+            <div class="profile-avatar">
+                <a href="index.html" aria-label="返回首页">
+                    <img src="image/icon.png" class="long" alt="LinkNest 链巢" width="60" height="60" decoding="async">
+                </a>
+            </div>
+            <div class="description">
+                <h1>动态</h1>
+                <p>这里记录最近发布、调整和维护的内容。</p>
+                <p>如果你从首页进来，这里就是最新消息的集中展示页。</p>
+            </div>
+        </div>
+        <div class="page-content">
+            <section class="content latest-content">
+                <h3>最新动态</h3>
+                <p class="latest-intro" id="latest-intro">下面是最近几条更新记录，你可以按时间快速了解站点状态。</p>
+                <div class="latest-timeline" id="latest-timeline">
+                    <article class="latest-post latest-placeholder">
+                        <div class="meta">
+                            <span class="tag">加载中</span>
+                            <span>正在读取 JSON 数据</span>
+                        </div>
+                        <h4>正在加载最新动态</h4>
+                        <p>页面会从 `data/latest.json` 读取内容。如果加载失败，会显示兜底提示。</p>
+                    </article>
+                </div>
+                <a class="latest-back" href="index.html">返回首页</a>
+            </section>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="site-credit">
+            <p>©谎伴Pro <span class="copyright-year"></span></p>
+            <span><a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener noreferrer">原创个人引导页</a></span>
+        </div>
+    </div>
+    <script>
+        const timeline = document.getElementById('latest-timeline');
+        const intro = document.getElementById('latest-intro');
+
+        function escapeHtml(value) {
+            return String(value)
+                .replaceAll('&', '&amp;')
+                .replaceAll('<', '&lt;')
+                .replaceAll('>', '&gt;')
+                .replaceAll('"', '&quot;')
+                .replaceAll("'", '&#39;');
+        }
+
+        function renderPosts(data) {
+            const posts = Array.isArray(data?.posts) ? data.posts : [];
+            if (!posts.length) {
+                timeline.innerHTML = `
+                    <article class="latest-post">
+                        <div class="meta">
+                            <span class="tag">暂无内容</span>
+                            <span>请先编辑 data/latest.json</span>
+                        </div>
+                        <h4>还没有配置动态内容</h4>
+                        <p>你可以在 JSON 文件里添加 posts 数组，页面会自动渲染出来。</p>
+                    </article>
+                `;
+                return;
+            }
+
+            intro.textContent = data.intro || intro.textContent;
+            const sortedPosts = [...posts].sort((a, b) => Number(Boolean(b.pinned)) - Number(Boolean(a.pinned)));
+
+            timeline.innerHTML = sortedPosts.map((post) => {
+                const tag = escapeHtml(post.tag || '更新');
+                const category = escapeHtml(post.category || '');
+                const author = escapeHtml(post.author || '');
+                const date = escapeHtml(post.date || '');
+                const title = escapeHtml(post.title || '未命名动态');
+                const summary = escapeHtml(post.summary || '');
+                const image = post.image ? `<img class="latest-post-image" src="${escapeHtml(post.image)}" alt="${title}" loading="lazy" decoding="async">` : '';
+                const link = post.link ? `<a class="latest-post-link" href="${escapeHtml(post.link)}" ${post.external ? 'target="_blank" rel="nofollow noopener noreferrer"' : ''}>查看详情</a>` : '';
+                const pinned = post.pinned ? '<span class="latest-pin">置顶</span>' : '';
+                const metaParts = [pinned, `<span class="tag">${tag}</span>`];
+                if (category) {
+                    metaParts.push(`<span class="latest-category">${category}</span>`);
+                }
+                if (author) {
+                    metaParts.push(`<span>作者：${author}</span>`);
+                }
+                if (date) {
+                    metaParts.push(`<span>${date}</span>`);
+                }
+
+                return `
+                    <article class="latest-post">
+                        <div class="meta">
+                            ${metaParts.join('')}
+                        </div>
+                        ${image}
+                        <h4>${title}</h4>
+                        <p>${summary}</p>
+                        ${link}
+                    </article>
+                `;
+            }).join('');
+        }
+
+        fetch('data/latest.json', { cache: 'no-store' })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(renderPosts)
+            .catch(() => {
+                timeline.innerHTML = `
+                    <article class="latest-post">
+                        <div class="meta">
+                            <span class="tag">加载失败</span>
+                            <span>无法读取 data/latest.json</span>
+                        </div>
+                        <h4>动态数据暂时不可用</h4>
+                        <p>请检查 JSON 文件路径、内容格式，或在本地使用静态服务器打开页面。</p>
+                    </article>
+                `;
+            });
+
+        document.querySelector('.copyright-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>

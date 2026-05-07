@@ -1,0 +1,35 @@
+{
+  "title": "最新动态",
+  "intro": "下面是最近几条更新记录，你可以按时间快速了解站点状态。",
+  "posts": [
+    {
+      "pinned": true,
+      "tag": "站点更新",
+      "category": "公告",
+      "author": "LinkNest",
+      "date": "2026-05-06",
+      "title": "新增独立最新动态页面",
+      "summary": "现在首页的“最新动态”入口会直接跳转到这个页面，方便集中展示近期维护记录、功能变化和公告信息。",
+      "image": "https://img.liesys.com/2022/11/29/6385e62830dac.jpg"
+    },
+    {
+      "pinned": false,
+      "tag": "页面优化",
+      "category": "更新",
+      "author": "LinkNest",
+      "date": "2026-05-06",
+      "title": "补充关于页入口与说明",
+      "summary": "关于页面新增了返回动态页的链接，便于在“首页 - 关于 - 动态”之间切换浏览。"
+    },
+    {
+      "pinned": false,
+      "tag": "后续计划",
+      "category": "规划",
+      "author": "LinkNest",
+      "date": "持续更新",
+      "title": "后续会继续记录站点变化",
+      "summary": "如果你后面要接入真实日志、RSS、时间线接口或 CMS 数据源，这个页面也可以直接作为动态聚合页使用。",
+      "image": "https://img.liesys.com/2022/11/29/6385e62830dac.jpg"
+    }
+  ]
+}
